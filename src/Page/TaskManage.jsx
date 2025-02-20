@@ -1,9 +1,10 @@
 import React from 'react';
+import AddTask from '../components/AddTask';
 
 const TaskManage = () => {
     return (
         <div>
-            this
+         <AddTask></AddTask>
         </div>
     );
 };

@@ -32,7 +32,7 @@ const Navbar = () => {
                             </div>
                           </div>
                         </div>
-                        <a onClick={handleLogout} className="btn bg-indigo-600 text-white">Logout</a>
+                        <a onClick={handleLogout} className="btn bg-indigo-500 text-white">Logout</a>
                     </div>
                 </div>
             </div>

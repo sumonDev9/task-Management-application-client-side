@@ -1,7 +1,7 @@
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase/firebase";
-import { createContext } from "react";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { createContext, useEffect, useState } from "react";
+
 
 
 const auth = getAuth(app);
@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
 
-const AuhProvider = ({children}) => {
+const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -18,12 +18,25 @@ const AuhProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+        //urrent user is by setting an observer
+        useEffect(() => {
+            const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+                setUser(currentUser);
+                setLoading(false);
+            });
+            return () => {
+                unsubscribe();
+            }
+        }, []);
+
     const authInfo = {
         user,
         setUser,
         loading,
         logInbyGoogle
     }
+    
+
     return (
         <AuthContext.Provider value={authInfo}>
             { children }
@@ -31,4 +44,4 @@ const AuhProvider = ({children}) => {
     );
 };
 
-export default AuhProvider;
+export default AuthProvider;

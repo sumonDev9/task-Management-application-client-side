@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuhProvider";
 
 
 
 const Register = () => {
+    const {user} = useContext(AuthContext);
+
+
     return (
         <div className='flex flex-col  justify-center items-center h-screen'>
             <h1 className='text-xl md:text-3xl font-bold text-[#111111]'>Sign in with Google to Manage Your Tasks</h1>

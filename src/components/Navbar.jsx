@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const {user} = useContext(AuthContext);
+    const {user, userLogout} = useContext(AuthContext);
+    const navigate = useNavigate(); // useNavigate হুক ব্যবহার করুন
 
+    const handleLogout = () => {
+        userLogout().then(() => {
+            navigate('/'); // লগআউট হলে login পেজে নিয়ে যাবে
+        });
+    };
 
     return (
         <div className='bg-white shadow-lg'>
@@ -25,7 +32,7 @@ const Navbar = () => {
                             </div>
                           </div>
                         </div>
-                        <a className="btn bg-indigo-600 text-white">Logout</a>
+                        <a onClick={handleLogout} className="btn bg-indigo-600 text-white">Logout</a>
                     </div>
                 </div>
             </div>

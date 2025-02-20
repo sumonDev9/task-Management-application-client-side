@@ -1,10 +1,12 @@
 import React from 'react';
 import AddTask from '../components/AddTask';
+import Navbar from '../components/Navbar';
 
 const TaskManage = () => {
     return (
         <div>
-         <AddTask></AddTask>
+            <Navbar></Navbar>
+         {/* <AddTask></AddTask> */}
         </div>
     );
 };

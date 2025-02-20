@@ -6,7 +6,7 @@ const TaskManage = () => {
     return (
         <div>
             <Navbar></Navbar>
-         {/* <AddTask></AddTask> */}
+            <AddTask></AddTask>
         </div>
     );
 };

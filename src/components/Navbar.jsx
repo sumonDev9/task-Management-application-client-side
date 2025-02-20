@@ -4,9 +4,9 @@ import { AuthContext } from '../AuthProvider/AuthProvider';
 const Navbar = () => {
     const {user} = useContext(AuthContext);
 
-    
+
     return (
-        <div className='bg-base-100 shadow-sm'>
+        <div className='bg-white shadow-lg'>
             <div className="navbar w-11/12 mx-auto">
                 <div className="navbar-start">
                     <a className="text-xl md:text-2xl text-[#111111] font-semibold">TaskHive</a>

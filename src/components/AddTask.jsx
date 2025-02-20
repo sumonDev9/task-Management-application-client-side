@@ -67,7 +67,7 @@ const AddTask = () => {
                 </form>
             </div>
             {/*  */}
-            <div >
+            <div className='hidden md:flex'>
                 <img className='h-[450px] mx-auto' src="https://i.ibb.co/YBqMrxnp/image.png" alt="" />
             </div>
         </div>

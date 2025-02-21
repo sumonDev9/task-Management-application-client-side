@@ -1,18 +1,41 @@
 import { useForm } from 'react-hook-form';
-
+import axios from "axios";
+import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 const AddTask = () => {
+    const {user} = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        console.log("Task Submitted:", data);
-        reset();
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post("http://localhost:5000/task", {
+                title: data.title,
+                description: data.description,
+                category: data.category,
+                timestamp: new Date().toISOString(),
+            });
+
+            console.log("Task Added:", response.data);
+
+            // Show success toast
+            toast.success("Task added successfully!");
+
+            // Reset form after successful submission
+            reset();
+        } catch (error) {
+            console.error("Error adding task:", error);
+
+            // Show error toast
+            toast.error("Failed to add task. Please try again.");
+        }
     };
 
     return (
    <div className=''>
          <div className='w-11/12 bg-white mx-auto grid grid-cols-1 md:grid-cols-2 gap-5  my-10'>
             <div className="p-6 shadow  rounded-lg">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Add New Task</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">{user?.displayName} Add New Task</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     {/* Task Title */}
@@ -32,9 +55,10 @@ const AddTask = () => {
 
                     {/* Description */}
                     <div>
-                        <label className="block text-gray-700 font-medium">Description (Optional)</label>
+                        <label className="block text-gray-700 font-medium">Description <span className="text-red-500">*</span></label>
                         <textarea
                             {...register("description", {
+                                required: "Description is required",
                                 maxLength: { value: 200, message: "Description cannot exceed 200 characters" }
                             })}
                             className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-400 outline-none h-24 resize-none"
@@ -50,7 +74,7 @@ const AddTask = () => {
                             {...register("category", { required: true })}
                             className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-400 outline-none"
                         >
-                            <option value="">Category selete</option>
+                            <option value="" disabled>Category select</option>
                             <option value="todo">To-Do</option>
                             <option value="inProgress">In Progress</option>
                             <option value="done">Done</option>
@@ -60,7 +84,7 @@ const AddTask = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-indigo-500 text-white py-2 rounded-md font-semibold hover:bg-indigo-600 transition"
+                        className="w-full cursor-pointer bg-indigo-500 text-white py-2 rounded-md font-semibold hover:bg-indigo-600 transition"
                     >
                         Add Task
                     </button>

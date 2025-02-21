@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const TaskList = () => {
    const {user} = useContext(AuthContext);
@@ -69,6 +70,75 @@ const TaskList = () => {
   }
   };
 
+  // const handleDelete = async (_id) => {
+       
+  //   const result =  await Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!"
+  // })
+  // if (result.isConfirmed) {
+  //   const { data } = await axios.delete(`http://localhost:5000/tasks/${_id}`);
+  //   console.log(data)
+  //   if (data.deletedCount > 0) {
+  //     Swal.fire({
+  //       title: 'Service Deleted!',
+  //       text: 'Your service has been deleted successfully.',
+  //       icon: 'success',
+  //       confirmButtonText: 'Okay',
+  //     });
+
+  //     const remainingTask = tasks.filter(task => task._id !== _id);
+  //     setTasks(remainingTask);
+
+ 
+  //   }
+  // }
+  // }
+
+  const handleDelete = async (_id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const { data } = await axios.delete(`http://localhost:5000/tasks/${_id}`);
+        console.log(data);
+  
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Task Deleted!",
+            text: "Your task has been deleted successfully.",
+            icon: "success",
+            confirmButtonText: "Okay",
+          });
+  
+          // category fiter delete
+          setTasks((prevTasks) => ({
+            todo: prevTasks.todo.filter((task) => task._id !== _id),
+            inprogress: prevTasks.inprogress.filter((task) => task._id !== _id),
+            done: prevTasks.done.filter((task) => task._id !== _id),
+          }));
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+        toast.error("Failed to delete task!");
+      }
+    }
+  };
+
+  
   return (
     <section className="bg-gradient-to-br from-gray-50 to-blue-100">
       <div className="w-11/12 mx-auto py-10">

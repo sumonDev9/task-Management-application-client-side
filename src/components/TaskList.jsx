@@ -7,11 +7,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 const TaskList = () => {
    const {user, fetchTasks, tasks, setTasks} = useContext(AuthContext);
    const [showModal, setShowModal] = useState(false);
-
+   const { register, handleSubmit, reset, formState: { errors } } = useForm();
    useEffect(() => {
   if (user?.email) {
     fetchTasks();
@@ -58,6 +59,32 @@ const handleEdit = () => {
   setShowModal(true);
 };
 
+
+const onSubmit = async (data) => {
+  // try {
+  //     const response = await axios.post("http://localhost:5000/tasks", {
+  //         title: data.title,
+  //         description: data.description,
+  //         category: data.category,
+  //         timestamp: new Date().toISOString(),
+  //         userEmail: user?.email
+  //     });
+
+      // console.log("Task Added:", response.data);
+
+      // Show success toast
+  //     toast.success("Task added successfully!");
+
+  //     // Reset form after successful submission
+  //     reset();
+  //     fetchTasks();
+  // } catch (error) {
+  //     console.error("Error adding task:", error);
+
+  //     // Show error toast
+  //     toast.error("Failed to add task. Please try again.");
+  // }
+};
 
 // Delete fetchTasks 
 const handleDelete = async (_id) => {
@@ -148,16 +175,56 @@ const handleDelete = async (_id) => {
         showModal && (
           <div className="modal modal-open">
             <div className="modal-box">
-              <h3 className="font-bold text-lg">Hello!</h3>
-              <p className="py-4">Press ESC key or click the button below to close</p>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+              {/* Task Title */}
+              <div>
+                        <label className="block text-gray-700 font-medium">Task Title <span className="text-red-500">*</span></label>
+                        <input
+                            type="text"
+                            {...register("title", {
+                                required: "Title is required",
+                                maxLength: { value: 50, message: "Title cannot exceed 50 characters" }
+                            })}
+                            className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-400 outline-none"
+                            placeholder="Enter task title"
+                        />
+                        {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Description <span className="text-red-500">*</span></label>
+                        <textarea
+                            {...register("description", {
+                                required: "Description is required",
+                                maxLength: { value: 200, message: "Description cannot exceed 200 characters" }
+                            })}
+                            className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-400 outline-none h-24 resize-none"
+                            placeholder="Enter task details"
+                        ></textarea>
+                        {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
+                    </div>
+
+                    {/* Category */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Category  <span className="text-red-500">*</span></label>
+                        <select
+                            {...register("category", { required: true })}
+                            className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-400 outline-none"
+                        >
+                            <option value="" disabled>Category select</option>
+                            <option value="todo">To-Do</option>
+                            <option value="inProgress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
               <div className="modal-action gap-2">
-                
-                  <button className="btn bg-indigo-500 text-white">Save</button>
+                <button className="btn bg-indigo-500 text-white">Save</button>
                   <button
                    onClick={() => setShowModal(false)}
                   className="btn text-white bg-rose-500">Close</button>
-            
               </div>
+            </form>
             </div>
           </div>
         )

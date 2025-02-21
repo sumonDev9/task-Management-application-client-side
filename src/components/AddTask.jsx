@@ -17,7 +17,7 @@ const AddTask = () => {
                 userEmail: user?.email
             });
 
-            console.log("Task Added:", response.data);
+            // console.log("Task Added:", response.data);
 
             // Show success toast
             toast.success("Task added successfully!");

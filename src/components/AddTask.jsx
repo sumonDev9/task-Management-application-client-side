@@ -9,11 +9,12 @@ const AddTask = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("http://localhost:5000/task", {
+            const response = await axios.post("http://localhost:5000/tasks", {
                 title: data.title,
                 description: data.description,
                 category: data.category,
                 timestamp: new Date().toISOString(),
+                userEmail: user?.email
             });
 
             console.log("Task Added:", response.data);

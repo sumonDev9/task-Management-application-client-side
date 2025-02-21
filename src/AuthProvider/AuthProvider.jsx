@@ -43,6 +43,7 @@ const AuthProvider = ({children}) => {
           toast.error("Failed to load tasks!");
         }
       };
+      
         //urrent user is by setting an observer
         useEffect(() => {
             const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

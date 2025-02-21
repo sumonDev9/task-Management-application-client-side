@@ -13,7 +13,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='bg-white shadow-lg'>
+        <div className='bg-white shadow-lg sticky top-0 z-50'>
             <div className="navbar w-11/12 mx-auto">
                 <div className="navbar-start">
                     <a className="text-xl md:text-2xl text-[#111111] font-semibold">TaskHive</a>

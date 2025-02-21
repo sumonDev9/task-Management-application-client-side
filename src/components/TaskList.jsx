@@ -43,7 +43,7 @@ const TaskList = () => {
     setTasks(updatedTasks);
 
     try {
-      await axios.patch(`http://localhost:5000/tasks/${movedItem._id}`, {
+      await axios.patch(`https://task-management-application-server-side.vercel.app/tasks/${movedItem._id}`, {
         category: destination.droppableId,
       });
 
@@ -69,7 +69,7 @@ const TaskList = () => {
     if (editTask) {
       // Update task (PUT request)
       try {
-        const response = await axios.put(`http://localhost:5000/tasks/${editTask._id}`, {
+        const response = await axios.put(`https://task-management-application-server-side.vercel.app/tasks/${editTask._id}`, {
           title: data.title,
           description: data.description,
           category: data.category,
@@ -104,7 +104,7 @@ const TaskList = () => {
 
     if (result.isConfirmed) {
       try {
-        const { data } = await axios.delete(`http://localhost:5000/tasks/${_id}`);
+        const { data } = await axios.delete(`https://task-management-application-server-side.vercel.app/tasks/${_id}`);
 
         if (data.deletedCount > 0) {
           Swal.fire("Task Deleted!", "Your task has been deleted successfully.", "success");
@@ -123,9 +123,9 @@ const TaskList = () => {
   return (
     <section className="bg-gradient-to-br from-gray-50 to-blue-100">
       <div className="w-11/12 mx-auto py-10">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Task Management Board</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-6">Task Management Board</h1>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-6">
             {Object.keys(tasks).map((column) => (
               <Droppable key={column} droppableId={column}>
                 {(provided) => (

@@ -29,7 +29,7 @@ const AuthProvider = ({children}) => {
     // context fetchTask data get 
     const fetchTasks = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/tasks/${user?.email}`);
+          const response = await axios.get(`https://task-management-application-server-side.vercel.app/tasks/${user?.email}`);
           const taskData = response.data;
       
           const categorizedTasks = { todo: [], inprogress: [], done: [] };

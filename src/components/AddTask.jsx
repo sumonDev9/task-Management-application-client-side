@@ -9,7 +9,7 @@ const AddTask = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("http://localhost:5000/tasks", {
+            const response = await axios.post("https://task-management-application-server-side.vercel.app/tasks", {
                 title: data.title,
                 description: data.description,
                 category: data.category,
@@ -37,7 +37,7 @@ const AddTask = () => {
    <div className=''>
          <div className='w-11/12 bg-white mx-auto grid grid-cols-1 md:grid-cols-2 gap-5  my-10'>
             <div className="p-6 shadow  rounded-lg">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">{user?.displayName} Add New Task</h2>
+                <h2 className="text-xl text-center md:text-2xl font-semibold text-gray-800 mb-4">{user?.displayName} Add New Task</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     {/* Task Title */}
@@ -94,7 +94,7 @@ const AddTask = () => {
             </div>
             {/*  */}
             <div className='hidden md:flex'>
-                <img className='h-[450px] mx-auto' src="https://i.ibb.co/YBqMrxnp/image.png" alt="" />
+                <img className='h-[450px] mx-auto object-cover' src="https://i.ibb.co/YBqMrxnp/image.png" alt="" />
             </div>
         </div>
    </div>

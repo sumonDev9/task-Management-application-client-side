@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Register from "../Page/Register";
 import TaskManage from "../Page/TaskManage";
+import PrivateRoute from "../AuthProvider/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
     },
     {
       path: "/task",
-      element: <TaskManage></TaskManage>
+      element: <PrivateRoute><TaskManage></TaskManage></PrivateRoute>
     },
   ]);
 

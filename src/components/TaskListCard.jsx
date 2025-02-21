@@ -2,7 +2,8 @@ import React from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
-const TaskListCard = () => {
+const TaskListCard = ({content}) => {
+    console.log(content)
     return (
         <div className="card bg-base-100 card-xs shadow-sm">
         <div className="card-body">
@@ -19,3 +20,4 @@ const TaskListCard = () => {
 };
 
 export default TaskListCard;
+

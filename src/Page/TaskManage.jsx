@@ -8,7 +8,7 @@ const TaskManage = () => {
         <div>
             <Navbar></Navbar>
             <AddTask></AddTask>
-            <TaskList></TaskList>
+            <TaskList ></TaskList>
         </div>
     );
 };

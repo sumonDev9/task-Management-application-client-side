@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 const AddTask = () => {
-    const {user} = useContext(AuthContext);
+    const {user, fetchTasks} = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
@@ -24,6 +24,7 @@ const AddTask = () => {
 
             // Reset form after successful submission
             reset();
+            fetchTasks();
         } catch (error) {
             console.error("Error adding task:", error);
 

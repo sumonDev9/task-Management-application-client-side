@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 
 const Register = () => {
     const {setUser, logInbyGoogle} = useContext(AuthContext);
     const navigate = useNavigate();
-
+    const location = useLocation();
 
     const handleGoogleSignIn = () => {
         logInbyGoogle()
@@ -16,8 +16,8 @@ const Register = () => {
             setUser(result.user);
             console.log(result.user)
             toast.success('login successfull!');
-            navigate('/task');
-    
+            // navigate('/task');
+            navigate(location.state ? location.state : "/task");
           })
           .catch((error) => {
             toast.error("Login failed. Please check your credentials!")

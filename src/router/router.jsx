@@ -12,11 +12,11 @@ const router = createBrowserRouter([
     },
     {
       path: "/task",
-      element: <PrivateRoute><TaskManage></TaskManage></PrivateRoute>
+      element: <PrivateRoute><TaskManage></TaskManage></PrivateRoute>,
     },
     {
       path: '*',
-      element: <ErrorPage></ErrorPage>
+      element: <ErrorPage></ErrorPage>,
     }
   ]);
 

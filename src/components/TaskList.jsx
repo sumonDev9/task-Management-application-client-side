@@ -12,7 +12,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 
 const TaskList = () => {
   const { user, fetchTasks, tasks, setTasks } = useContext(AuthContext);
-  console.log(tasks)
+  // console.log(tasks)
   const [showModal, setShowModal] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [editTask, setEditTask] = useState(null);

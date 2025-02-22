@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Register = () => {
-    const {setUser, logInbyGoogle} = useContext(AuthContext);
+    const {setUser,user, logInbyGoogle} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -14,8 +14,8 @@ const Register = () => {
         logInbyGoogle()
           .then(result => {
             setUser(result.user);
-            console.log(result.user)
-            toast.success('login successfull!');
+            // console.log(result.user)
+            toast.success(`wellcome ${result.user?.displayName} login successfull!`);
             // navigate('/task');
             navigate(location.state ? location.state : "/task");
           })

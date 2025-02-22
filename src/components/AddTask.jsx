@@ -80,7 +80,7 @@ const AddTask = () => {
                         >
                             <option value="" disabled>Category select</option>
                             <option value="todo">To-Do</option>
-                            <option value="inProgress">In Progress</option>
+                            <option value="inprogress">In Progress</option>
                             <option value="done">Done</option>
                         </select>
                     </div>

@@ -22,6 +22,15 @@ const TaskList = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (editTask) {
+      reset({
+        title: editTask.title,
+        description: editTask.description,
+        category: editTask.category, 
+      });
+    }
+  }, [editTask, reset]);
 
   const handleDragEnd = async (result) => {
     if (!result.destination) return;
@@ -227,7 +236,7 @@ const TaskList = () => {
                   >
                     <option value="" disabled>Category select</option>
                     <option value="todo">To-Do</option>
-                    <option value="inProgress">In Progress</option>
+                    <option value="inprogress">In Progress</option>
                     <option value="done">Done</option>
                   </select>
                 </div>

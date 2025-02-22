@@ -48,8 +48,6 @@ Welcome to **TaskHive**! 🎉 A modern, intuitive, and feature-rich task managem
    ```bash
    git clone https://github.com/sumonDev9/task-Management-application-client-side
 
-   Navigate to the project directory:
-
 2. **Navigate to the project directory:**
 cd TaskHive
 

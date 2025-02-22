@@ -14,7 +14,9 @@ const AddTask = () => {
                 description: data.description,
                 category: data.category,
                 timestamp: new Date().toISOString(),
-                userEmail: user?.email
+                userEmail: user?.email,
+                name: user?.displayName,
+                userId: user?.uid
             });
 
             // console.log("Task Added:", response.data);
